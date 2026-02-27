@@ -9,6 +9,6 @@
     "module": "nodenext",
     "target": "esnext"
   },
-  "include": ["src/index.ts", "src/**/*.ts"],
+  "include": ["src/**/*.ts"],
   "exclude": ["dist"]
 }

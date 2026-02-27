@@ -4,7 +4,7 @@ import { matches } from "./match.schema";
 
 export const commentary = pgTable("commentary", {
   id: serial("id").primaryKey(),
-  matchId: integer("matchId")
+  matchId: integer("match_id")
     .notNull()
     .references(() => matches.id),
   minutes: integer("minutes"),
