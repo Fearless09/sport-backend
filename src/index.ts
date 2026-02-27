@@ -1,17 +1,17 @@
-import { WebSocketServer } from "ws";
+import { WebSocketServer, WebSocket } from "ws";
 import { PORT } from "./config/env.config";
 
 const wss = new WebSocketServer({ port: Number(PORT) });
 
 wss.on("connection", (ws, req) => {
-  const clientIp = req.socket.remoteAddress;
+  const clientIp = req.socket.remoteAddress ?? "Anynomous";
 
   ws.on("message", (data) => {
     const msg = data.toString();
 
     wss.clients.forEach((client) => {
-      if (client !== ws && client.readyState === ws.OPEN) {
-        client.send(`${new Date().toLocaleTimeString()} [${clientIp}]: ${msg}`);
+      if (client !== ws && client.readyState === WebSocket.OPEN) {
+        client.send(`${new Date().toISOString()} [${clientIp}]: ${msg}`);
       }
     });
   });

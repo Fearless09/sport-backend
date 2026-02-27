@@ -4,6 +4,7 @@ export const timestamps = {
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at")
     .notNull()
-    .$onUpdate(() => new Date()),
-  deletedAt: timestamp("deleted_at")
+    .$onUpdate(() => new Date())
+    .defaultNow(),
+  deletedAt: timestamp("deleted_at"),
 };
