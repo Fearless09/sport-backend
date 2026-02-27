@@ -1,5 +1,5 @@
 {
-  "id": "c2bd1fd4-6d41-4614-a5a3-53c6b7484242",
+  "id": "660906b1-b1a3-49cf-8709-6bc77f1f8b89",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -14,8 +14,8 @@
           "primaryKey": true,
           "notNull": true
         },
-        "matchId": {
-          "name": "matchId",
+        "match_id": {
+          "name": "match_id",
           "type": "integer",
           "primaryKey": false,
           "notNull": true
@@ -85,7 +85,8 @@
           "name": "updated_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         },
         "deleted_at": {
           "name": "deleted_at",
@@ -96,12 +97,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "commentary_matchId_matches_id_fk": {
-          "name": "commentary_matchId_matches_id_fk",
+        "commentary_match_id_matches_id_fk": {
+          "name": "commentary_match_id_matches_id_fk",
           "tableFrom": "commentary",
           "tableTo": "matches",
           "columnsFrom": [
-            "matchId"
+            "match_id"
           ],
           "columnsTo": [
             "id"
@@ -140,15 +141,17 @@
         },
         "home_score": {
           "name": "home_score",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": 0
         },
         "away_score": {
           "name": "away_score",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": 0
         },
         "sport": {
           "name": "sport",
@@ -166,7 +169,7 @@
           "name": "end_time",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "status": {
           "name": "status",
@@ -187,7 +190,8 @@
           "name": "updated_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         },
         "deleted_at": {
           "name": "deleted_at",
