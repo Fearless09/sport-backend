@@ -8,7 +8,7 @@ export function getMatchStatus(
   switch (true) {
     case now < startTime:
       return "scheduled";
-    case now > endTime:
+    case now >= endTime:
       return "finished";
     default:
       return "live";
@@ -21,7 +21,7 @@ export async function syncMatchStatus(
 ): Promise<MatchStatus> {
   const newStatus = getMatchStatus(match.startTime, match.endTime);
   if (newStatus !== match.status) {
-    await updateMatchStatus(match);
+    await updateMatchStatus({ ...match, status: newStatus });
     match.status = newStatus;
   }
   return match.status;

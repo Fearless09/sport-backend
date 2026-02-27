@@ -33,9 +33,9 @@ export const createMatch = async (req: Request, res: Response) => {
       data: newMatch,
     });
   } catch (error) {
+    console.error("Error creating match", error);
     res.status(500).json({
       message: "Failed to create match",
-      error: JSON.stringify(error),
     });
   }
 };
@@ -63,9 +63,9 @@ export const getAllMatches = async (req: Request, res: Response) => {
       data: matches,
     });
   } catch (error) {
+    console.error("Error fetching matches", error);
     res.status(500).json({
       message: "Failed to fetch matches",
-      error: JSON.stringify(error),
     });
   }
 };

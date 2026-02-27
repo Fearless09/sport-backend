@@ -29,7 +29,6 @@ export const updateMatchScoreSchema = z.object({
 });
 
 export const listMatchesSchema = z.object({
-  //   page: z.coerce.number().int().positive().optional(),
   limit: z.coerce.number().int().positive().max(100).optional(),
 });
 
@@ -40,10 +39,19 @@ export const matchIdSchema = z.object({
 export const updateMatchSchema = z.object({
   homeTeam: z.string().min(1, "Home team is required").optional(),
   awayTeam: z.string().min(1, "Away team is required").optional(),
-  homeScore: z.number().min(0, "Home score must be at least 0").optional(),
-  awayScore: z.number().min(0, "Away score must be at least 0").optional(),
+  homeScore: z
+    .number()
+    .int()
+    .nonnegative()
+    .min(0, "Home score must be at least 0")
+    .optional(),
+  awayScore: z
+    .number()
+    .int()
+    .nonnegative()
+    .min(0, "Away score must be at least 0")
+    .optional(),
   status: z.enum(matchStatusEnum.enumValues).optional(),
-  scheduledStart: z.coerce.date().optional(),
-  actualStart: z.coerce.date().optional(),
-  actualEnd: z.coerce.date().optional(),
+  startTime: z.coerce.date().optional(),
+  endTime: z.coerce.date().optional(),
 });
