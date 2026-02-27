@@ -7,7 +7,8 @@
     "esModuleInterop": true,
     "moduleResolution": "nodenext",
     "module": "nodenext",
-    "target": "esnext"
+    "target": "esnext",
+    "strict": true
   },
   "include": ["src/**/*.ts"],
   "exclude": ["dist"]

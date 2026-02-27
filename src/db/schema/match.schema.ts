@@ -1,4 +1,11 @@
-import { pgTable, serial, text, pgEnum, timestamp, integer } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  serial,
+  text,
+  pgEnum,
+  timestamp,
+  integer,
+} from "drizzle-orm/pg-core";
 import { timestamps } from "../../helper/schema.helper";
 
 export const matchStatusEnum = pgEnum("match_status", [
@@ -7,7 +14,7 @@ export const matchStatusEnum = pgEnum("match_status", [
   "finished",
 ]);
 
-export const matches = pgTable("matches", {
+export const match = pgTable("matches", {
   id: serial("id").primaryKey(),
   homeTeam: text("home_team").notNull(),
   awayTeam: text("away_team").notNull(),
@@ -15,12 +22,12 @@ export const matches = pgTable("matches", {
   awayScore: integer("away_score").notNull().default(0),
   sport: text("sport").notNull(),
   startTime: timestamp("start_time").notNull(),
-  endTime: timestamp("end_time"),
+  endTime: timestamp("end_time").notNull(),
   status: matchStatusEnum("status").notNull().default("scheduled"),
 
   ...timestamps,
 });
 
-export type Match = typeof matches.$inferSelect;
-export type NewMatch = typeof matches.$inferInsert;
+export type Match = typeof match.$inferSelect;
+export type NewMatch = typeof match.$inferInsert;
 export type MatchStatus = (typeof matchStatusEnum.enumValues)[number];

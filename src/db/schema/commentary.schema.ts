@@ -1,12 +1,12 @@
 import { pgTable, text, serial, integer, jsonb } from "drizzle-orm/pg-core";
 import { timestamps } from "../../helper/schema.helper";
-import { matches } from "./match.schema";
+import { match } from "./match.schema";
 
 export const commentary = pgTable("commentary", {
   id: serial("id").primaryKey(),
   matchId: integer("match_id")
     .notNull()
-    .references(() => matches.id),
+    .references(() => match.id),
   minutes: integer("minutes"),
   sequence: integer("sequence"),
   period: text("period"),
