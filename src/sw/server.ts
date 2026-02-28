@@ -14,6 +14,8 @@ export const sendJson = (socket: WebSocket, payload: Payload) => {
 
 export const broadcastJson = (wss: WebSocketServer, payload: Payload) => {
   for (const client of wss.clients) {
+    if (client.readyState !== WebSocket.OPEN) continue;
+
     sendJson(client, payload);
   }
 };
@@ -38,7 +40,6 @@ export const attachWebSocketServer = (server: Server) => {
     ws.on("error", (error) => {
       console.error("WebSocket error:", error);
     });
-
   });
 
   const broadcastMatchCreated = (match: Match) => {
