@@ -25,6 +25,10 @@ export const attachWebSocketServer = (server: Server) => {
     maxPayload: 1024 * 1024, // 1 mb
   });
 
+  wss.on("error", (error) => {
+    console.error("WebSocketServer error:", error);
+  });
+
   wss.on("connection", (ws) => {
     sendJson(ws, {
       type: "welcome",
@@ -35,13 +39,6 @@ export const attachWebSocketServer = (server: Server) => {
       console.error("WebSocket error:", error);
     });
 
-    // ws.on("message", (message) => {
-    //   console.log("Received message:", message.toString());
-    // });
-
-    // ws.on("close", () => {
-    //   console.log("Client disconnected");
-    // });
   });
 
   const broadcastMatchCreated = (match: Match) => {

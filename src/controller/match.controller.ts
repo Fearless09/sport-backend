@@ -28,9 +28,11 @@ export const createMatch = async (req: Request, res: Response) => {
       })
       .returning();
 
-    if (res.app.locals.broadcastMatchCreated) {
+    try {
       res.app.locals.broadcastMatchCreated(newMatch);
-    } 
+    } catch (err) {
+      console.error("Failed to broadcast match creation:", err);
+    }
 
     res.status(201).json({
       message: "Match created successfully",
