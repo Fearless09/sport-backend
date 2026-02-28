@@ -28,6 +28,10 @@ export const createMatch = async (req: Request, res: Response) => {
       })
       .returning();
 
+    if (res.app.locals.broadcastMatchCreated) {
+      res.app.locals.broadcastMatchCreated(newMatch);
+    } 
+
     res.status(201).json({
       message: "Match created successfully",
       data: newMatch,

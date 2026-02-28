@@ -4,4 +4,4 @@ config({
   path: [`.env`],
 });
 
-export const { PORT, DATABASE_URL } = process.env;
+export const { PORT, DATABASE_URL, HOST } = process.env;
